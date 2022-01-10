@@ -2,14 +2,19 @@ from user_inscription import *
 
 category = {"Poussin": [], "Cadet": [], "Junior": [], "Semi-pro": [], "Pro": []}
 
-# Ajouter For ou while pour nombre d'inscrits à ajouter
+# Mode no limit ou avec nb d'entrées
 compteur_inscription = 0
 
 nombre_inscription = ""
 while check_user_input_num(nombre_inscription):
+    print("Entrer 'godmode' pour passer en mode 'no limit'")
     nombre_inscription = input("Combien d'inscription comptez-vous faire ?\n")
-nombre_inscription = int(nombre_inscription)
+if nombre_inscription != "godmode":
+    nombre_inscription = int(nombre_inscription)
+else:
+    compteur_inscription = ""
 
+# Input data
 while compteur_inscription != nombre_inscription:
     candidat_surname = ""
     while check_length_max_input(candidat_surname, 15):
@@ -36,9 +41,20 @@ while compteur_inscription != nombre_inscription:
         print("Le candidat ne peut être inscrit à cause de son âge\n")
     else:
         user_add(candidat, category)
-    compteur_inscription += 1
+
+# Check continue ou fin nb d'entrée prédéfinie
+    if nombre_inscription == "godmode":
+        continuer = input("Continuer ? y/n\n")
+        if continuer == "y":
+            compteur_inscription = ""
+        else:
+            compteur_inscription = "godmode"
+    else:
+        compteur_inscription += 1
+
 # Prévoir fct pour check catégorie pour annulation inscription si déjà inscrits
 
-# print(candidat_surname, candidat_name, candidat_email, candidat_birth_year, candidat_age)
-# print(candidat)
+# Affichage data
 affichage_liste(category)
+
+# Gestion fichier .csv

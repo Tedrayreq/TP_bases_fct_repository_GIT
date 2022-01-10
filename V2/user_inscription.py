@@ -19,14 +19,18 @@ def check_length_max_input(data, length_max):
 
 def check_user_input_num(data, com="Veuillez utilisez des chiffres"):
     continuer = True
-    try:
-        year = int(data)
-    except ValueError:
-        print(com)
-    else:
+    if data == "godmode":
         continuer = False
-    finally:
         return continuer
+    else:
+        try:
+            year = int(data)
+        except ValueError:
+            print(com)
+        else:
+            continuer = False
+        finally:
+            return continuer
 
 
 def user_email(surname, name):
