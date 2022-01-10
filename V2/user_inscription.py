@@ -1,3 +1,7 @@
+from datetime import datetime
+import csv
+
+
 def user_birth_date_check(year):
     continuer = True
     if len(year) == 4:
@@ -86,3 +90,10 @@ def user_add(user, dico):
 def affichage_liste(dico):
     for item in dico:
         print(item, dico[item])
+
+
+def save_file(dico):
+    current_date_brut = datetime.now()
+    current_date = current_date_brut.strftime("%Y-%m-%d")
+    file_name = "inscrits-" + current_date + ".csv"
+    
