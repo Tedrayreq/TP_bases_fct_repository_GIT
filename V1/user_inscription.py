@@ -7,6 +7,28 @@ def user_birth_date_check(year):
     return continuer
 
 
+def check_length_max_input(data, length_max):
+    continuer = True
+    if 0 < len(data) <= length_max:
+        continuer = False
+    elif len(data) > length_max:
+        print("L'entrée est trop longue, inscription impossible.")
+        print("Veuillez contactez l'administrateur programme ou l'abréger.\n")
+    return continuer
+
+
+def check_user_input_num(data, com="Veuillez utilisez des chiffres"):
+    continuer = True
+    try:
+        year = int(data)
+    except ValueError:
+        print(com)
+    else:
+        continuer = False
+    finally:
+        return continuer
+
+
 def user_email(surname, name):
     email_template = "@baton-rouge.fr"
     email = surname[0] + "." + name + email_template
@@ -31,7 +53,7 @@ def user_category(age):
     elif 30 < age <= 40:
         return "Pro"
     else:
-        print("Quelque chose c'est mal passé")
+        print("Quelque chose s'est mal passé")
 
 
 def user_add(user, dico):
@@ -40,7 +62,7 @@ def user_add(user, dico):
         print("\nNom : ", user[0], "\nprenom : ", user[1], "\nemail : ", user[2], "\ncatégorie : ", user[3], "\n")
         correct = input("Données correcte ? y/n\n")
         if correct == "y":
-            dico[user[3]] = [user]
+            dico[user[3]].append([user])
             print("---------------------")
             print("inscription réussie")
             print("---------------------\n")
@@ -55,3 +77,8 @@ def user_add(user, dico):
             print("-------------------------------------------------")
             print("Veuillez rentrer 'y' ou 'n'")
             print("-------------------------------------------------\n")
+
+
+def affichage_liste(dico):
+    for item in dico:
+        print(item, dico[item])
