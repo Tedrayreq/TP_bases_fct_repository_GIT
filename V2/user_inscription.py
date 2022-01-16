@@ -1,6 +1,8 @@
 from datetime import datetime
 import csv
-
+from operator import truediv
+import os, sys
+import os.path
 
 def user_birth_date_check(year):
     continuer = True
@@ -91,23 +93,42 @@ def affichage_liste(dico):
     for item in dico:
         print(item, dico[item])
 
-
-def save_file(dico):
+def name_file():
     current_date_brut = datetime.now()
     current_date = current_date_brut.strftime("%Y-%m-%d")
     file_name = "inscrits-" + current_date + ".csv"
-    with open(file_name, 'a') as csv_file:
+    return file_name
+
+# à partir de là, ça foire.
+# impossible de définir un chemin relatif, ma fonction me retourne False même si le fichier existe
+def check_file(name_file):
+    chemin = "/csvfolder/" + str(name_file)
+    is_file = os.path.exists(chemin)
+    return is_file
+
+
+def save_file(dico):
+    with open('csvfolder\\' + file_name, 'a') as csv_file:
         monwriter = csv.writer(csv_file, delimiter=';')
-        if #os.listdir() -> retourne une liste (if chaine de carac in liste)
-        #s'il n'y a pas telle chaine de carac dans ma liste écrire l'entête
-        for i in dico:
-            monwriter.writerow([i])
-            for j in dico[i]:
-                monwriter.writerow([j[0], j[1], j[2], j[3]])
+        dirs = os.listdir('csvfolder\\')
+        entete = "nom;prénom;mail;catégorie"
+        for file in dirs:
+            print(file)
+        if entete in dirs:
+            for i in dico:
+                monwriter.writerow([i])
+                for j in dico[i]:
+                    monwriter.writerow([j[0], j[1], j[2], j[3]])
+        else :
+            monwriter.writerow(entete)
+            for i in dico:
+                monwriter.writerow([i])
+                for j in dico[i]:
+                    monwriter.writerow([j[0], j[1], j[2], j[3]])
 
-with open('test.csv', 'w') as csv_file:
-    monwriter = csv.writer(csv_file, delimiter=';')
-    monwriter.writerow(["toto"]+["tata"])
-    monwriter.writerow(["titi", "tutu"])
+# with open('test.csv', 'w') as csv_file:
+#     monwriter = csv.writer(csv_file, delimiter=';')
+#     monwriter.writerow(["toto"]+["tata"])
+#     monwriter.writerow(["titi", "tutu"])
 
-{"Poussin": [[nom, prenom, mail, cat], [nom, prénom, mail, cat]], "Cadet": [], "Junior": [], "Semi-pro": [], "Pro": []}
+# {"Poussin": [[nom, prenom, mail, cat], [nom, prénom, mail, cat]], "Cadet": [], "Junior": [], "Semi-pro": [], "Pro": []}

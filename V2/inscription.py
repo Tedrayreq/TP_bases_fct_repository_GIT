@@ -57,4 +57,14 @@ while compteur_inscription != nombre_inscription:
 # Affichage data
 affichage_liste(category)
 
+# ---------------------
 # Gestion fichier .csv
+# ---------------------
+# création nom
+new_name = name_file()
+
+# check existence fichier
+check_file(new_name)
+
+# création dans le cas contraire 
+save_file(category)
