@@ -96,4 +96,18 @@ def save_file(dico):
     current_date_brut = datetime.now()
     current_date = current_date_brut.strftime("%Y-%m-%d")
     file_name = "inscrits-" + current_date + ".csv"
-    
+    with open(file_name, 'a') as csv_file:
+        monwriter = csv.writer(csv_file, delimiter=';')
+        if #os.listdir() -> retourne une liste (if chaine de carac in liste)
+        #s'il n'y a pas telle chaine de carac dans ma liste écrire l'entête
+        for i in dico:
+            monwriter.writerow([i])
+            for j in dico[i]:
+                monwriter.writerow([j[0], j[1], j[2], j[3]])
+
+with open('test.csv', 'w') as csv_file:
+    monwriter = csv.writer(csv_file, delimiter=';')
+    monwriter.writerow(["toto"]+["tata"])
+    monwriter.writerow(["titi", "tutu"])
+
+{"Poussin": [[nom, prenom, mail, cat], [nom, prénom, mail, cat]], "Cadet": [], "Junior": [], "Semi-pro": [], "Pro": []}
